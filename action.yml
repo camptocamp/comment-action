@@ -1,0 +1,15 @@
+name: 'Comment'
+description: 'Add a comment to github PR'
+inputs:
+  jira-project:
+    description: 'The JIRA project name'
+    required: true
+  template:
+    description: 'Template for the comment to create'
+    required: true
+    default: |
+      Links:
+      - [jira](https://jira.camptocamp.com/browse/${JIRA_ISSUE})
+runs:
+  using: 'node20'
+  main: 'index.js'
