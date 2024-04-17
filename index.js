@@ -12,9 +12,14 @@ function getBranch() {
 }
 
 function formatComment() {
-  const template = core.getInput('template');
+  let template = core.getInput('template');
   const DNAME = getBranch().replaceAll('/', '_');
   const jiraIssue = getJiraIssue();
+  if (!jiraIssue) {
+    // Remove comment line containing ${JIRA_ISSUE}
+    template = template.split('\n').filter(l => !l.includes('${JIRA_ISSUE}')).join('\n');
+  }
+
   return template.replaceAll('${DNAME}', DNAME).replaceAll('${JIRA_ISSUE}', jiraIssue);
 }
 
@@ -25,7 +30,7 @@ function getJiraIssue() {
   const match = regexp.exec(branch);
   if (!match) {
     console.log('No Jira issue found in branch name', branch, 'using project key', project);
-    throw new Error('No Jira issue found in branch name');
+    return '';
   }
   return match[1];
 }
