@@ -57,12 +57,16 @@ async function addComment(comment) {
 try {
   if (isPR()) {
     const comment = formatComment();
-    const currentComments = await getCurrentComments();
-    if (!currentComments.includes(comment)) {
-      await addComment(comment);
-      console.log('Comment added');
+    if (comment) {
+      const currentComments = await getCurrentComments();
+      if (!currentComments.includes(comment)) {
+        await addComment(comment);
+        console.log('Comment added');
+      } else {
+        console.log('Comment already present, skipping');
+      }
     } else {
-      console.log('Comment already present, skipping');
+      console.log('Comment body empty, skipping')
     }
   } else {
     console.log('Not a PR, skipping');
