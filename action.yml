@@ -11,5 +11,5 @@ inputs:
       Links:
       - [jira](https://jira.camptocamp.com/browse/${JIRA_ISSUE})
 runs:
-  using: 'node20'
-  main: 'index.js'
+  using: 'node24'
+  main: 'dist/index.js'

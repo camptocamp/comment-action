@@ -41,3 +41,14 @@ Here:
 
 - `${DNAME}` is the branch name with all `/` changed to `_`;
 - `${JIRA_ISSUE}` is the jira issue (jira_project-number) parsed from the branch name
+
+## Development
+
+After modifying `src/index.js`, rebuild the bundle and commit the result:
+
+```sh
+npm install
+npm run build
+git add src/index.js dist/index.js
+git commit -m "..."
+```
